@@ -1,0 +1,126 @@
+﻿<Window x:Class="FirewallApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FirewallApp"
+        mc:Ignorable="d"
+        Title="Gelişmiş Güvenlik Duvarı Kontrol Paneli" Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF1E1E1E">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Üst Menü -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF2D2D2D" Height="50">
+            <Button Content="Güvenlik Duvarı Durumu" Margin="10" Padding="10,5" Background="#FF007ACC" Foreground="White"/>
+            <Button Content="IDS/IPS" Margin="10" Padding="10,5" Background="#FF007ACC" Foreground="White"/>
+            <Button Content="Honeypot" Margin="10" Padding="10,5" Background="#FF007ACC" Foreground="White"/>
+            <Button Content="Loglar ve Raporlar" Margin="10" Padding="10,5" Background="#FF007ACC" Foreground="White"/>
+            <Button Content="Ayarlar" Margin="10" Padding="10,5" Background="#FF007ACC" Foreground="White"/>
+        </StackPanel>
+
+        <!-- Ana İçerik -->
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Durum Kartları -->
+            <WrapPanel Grid.Row="0" Margin="0,0,0,20">
+                <Border Background="#FF2D2D2D" CornerRadius="10" Padding="20" Margin="0,0,20,0" Width="200">
+                    <StackPanel>
+                        <TextBlock Text="Güvenlik Duvarı Durumu" Foreground="White" FontSize="16"/>
+                        <TextBlock Text="Aktif" Foreground="#FF00FF00" FontSize="24" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#FF2D2D2D" CornerRadius="10" Padding="20" Margin="0,0,20,0" Width="200">
+                    <StackPanel>
+                        <TextBlock Text="IDS/IPS Durumu" Foreground="White" FontSize="16"/>
+                        <TextBlock Text="Aktif" Foreground="#FF00FF00" FontSize="24" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#FF2D2D2D" CornerRadius="10" Padding="20" Margin="0,0,20,0" Width="200">
+                    <StackPanel>
+                        <TextBlock Text="Honeypot Durumu" Foreground="White" FontSize="16"/>
+                        <TextBlock Text="Aktif" Foreground="#FF00FF00" FontSize="24" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#FF2D2D2D" CornerRadius="10" Padding="20" Width="200">
+                    <StackPanel>
+                        <TextBlock Text="Tespit Edilen Saldırılar" Foreground="White" FontSize="16"/>
+                        <TextBlock Text="0" Foreground="#FFFF0000" FontSize="24" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+            </WrapPanel>
+
+            <!-- Ana Liste -->
+            <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0">
+                <!-- IDS/IPS Sekmesi -->
+                <TabItem Header="IDS/IPS Uyarıları">
+                    <DataGrid AutoGenerateColumns="False" Background="Transparent" BorderThickness="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Zaman" Width="150"/>
+                            <DataGridTextColumn Header="Kaynak IP" Width="120"/>
+                            <DataGridTextColumn Header="Hedef IP" Width="120"/>
+                            <DataGridTextColumn Header="Port" Width="80"/>
+                            <DataGridTextColumn Header="Protokol" Width="80"/>
+                            <DataGridTextColumn Header="Saldırı Türü" Width="150"/>
+                            <DataGridTextColumn Header="Önem Derecesi" Width="100"/>
+                            <DataGridTextColumn Header="Detaylar" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <!-- Honeypot Sekmesi -->
+                <TabItem Header="Honeypot Olayları">
+                    <DataGrid AutoGenerateColumns="False" Background="Transparent" BorderThickness="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Zaman" Width="150"/>
+                            <DataGridTextColumn Header="Kaynak IP" Width="120"/>
+                            <DataGridTextColumn Header="Port" Width="80"/>
+                            <DataGridTextColumn Header="Olay Türü" Width="120"/>
+                            <DataGridTextColumn Header="Kullanıcı Adı" Width="120"/>
+                            <DataGridTextColumn Header="Komut" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <!-- Loglar ve Raporlar Sekmesi -->
+                <TabItem Header="Loglar ve Raporlar">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                            <DatePicker Width="150" Margin="0,0,10,0"/>
+                            <DatePicker Width="150" Margin="0,0,10,0"/>
+                            <Button Content="Rapor Oluştur" Padding="10,5" Background="#FF007ACC" Foreground="White"/>
+                        </StackPanel>
+
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" Background="Transparent" BorderThickness="0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Zaman" Width="150"/>
+                                <DataGridTextColumn Header="Olay Türü" Width="120"/>
+                                <DataGridTextColumn Header="Kaynak IP" Width="120"/>
+                                <DataGridTextColumn Header="Hedef IP" Width="120"/>
+                                <DataGridTextColumn Header="Port" Width="80"/>
+                                <DataGridTextColumn Header="Protokol" Width="80"/>
+                                <DataGridTextColumn Header="Detaylar" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
